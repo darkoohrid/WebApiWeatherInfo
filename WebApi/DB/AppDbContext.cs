@@ -14,7 +14,7 @@ namespace WebApi.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-                optionsBuilder.UseSqlServer("DESKTOP-K9L2Q5V\\SQLEXPRESS;Database=WebApiWeatherInfo;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-K9L2Q5V\\SQLEXPRESS;Database=WebApiWeatherInfo;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
