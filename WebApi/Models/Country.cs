@@ -16,6 +16,7 @@ namespace WebApi.Models
         [Column(TypeName = "varchar(100)")]
         public string Name { get; set; }
 
+        // Country can have multiple Cities
         public ICollection<City> Cities { get; set; }
     }
 }

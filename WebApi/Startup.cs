@@ -28,13 +28,16 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //Added NewtonsoftJson to handle .Net Core 3.0 possible object cycle was detected which is not supported ERROR in Controller methods
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            // Adding the AppDbContext
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("WebApi"));
             });
+            // Adding Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "My API", Version = "v2" });

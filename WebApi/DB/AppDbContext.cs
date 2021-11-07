@@ -14,11 +14,14 @@ namespace WebApi.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // Connection with SQLServer
                 optionsBuilder.UseSqlServer("Server=DESKTOP-K9L2Q5V\\SQLEXPRESS;Database=WebApiWeatherInfo;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // One to Many relationship 
+            // If Country is Deleted, all the cities associated with that CountryId are deleted too
             modelBuilder.Entity<City>()
                         .HasOne(e => e.Country)
                         .WithMany(e => e.Cities)

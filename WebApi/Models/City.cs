@@ -18,6 +18,7 @@ namespace WebApi.Models
         [Column(TypeName = "varchar(50)")]
         public string Name { get; set; }
 
+        // City has only one Country assosiated with
         public Country Country { get; set; }
     }
 }

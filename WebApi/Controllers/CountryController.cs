@@ -13,6 +13,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
+        // Accessing the data from database
         readonly AppDbContext _database;
 
         public CountryController(AppDbContext database)
@@ -24,11 +25,14 @@ namespace WebApi.Controllers
         [HttpPost]
         public ActionResult CreateCountry(string inpCountry)
         {
-                bool countryExist = _database.Countries.Any(c => c.Name == inpCountry);
-                if (!countryExist) { 
+            // Checking if Country already exist , also checking for NullOrWhiteSpace
+            bool countryExist = _database.Countries.Any(c => c.Name == inpCountry);
+                if (!countryExist && !string.IsNullOrWhiteSpace(inpCountry)) { 
+                // If conditions are satisfied add to database and save changes
                     _database.Countries.Add(new Country { Name = inpCountry });
                     _database.SaveChanges();
                 }
+            // getting the country from database to show the automaticaly created ID [Key] aswell
             var createdCountry = _database.Countries.First(t => t.Name == inpCountry);
             return Ok(createdCountry);
         }
